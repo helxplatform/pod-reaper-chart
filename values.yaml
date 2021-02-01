@@ -9,17 +9,28 @@ image:
 # Example config:
 #
 reapers: 
-  helx-reaper:
+  short-running-apps:
     namespace: ""
     grace_period: 10m
     schedule: "@every 1m"
     run_duration: "0s"
-    require_label_key: "executor"
-    require_label_values: "tycho"
+    require_label_key: "app-name"
+    require_label_values: "jupyter-ds,imagej,napari,cloud-top,dicom-cloudtop,dicom-gh,blackbalsam,gsforge"
     dry_run: "false"
     log_level: "Info"
     log_format: "Logrus"
-    max_duration: "1m"
+    max_duration: "1h"
+  long-running-apps:
+    namespace: ""
+    grace_period: 10m
+    schedule: "@every 1m"
+    run_duration: "0s"
+    require_label_key: "app-name"
+    require_label_values: "nextflow"
+    dry_run: "false"
+    log_level: "Info"
+    log_format: "Logrus"
+    max_duration: "5h"
 resources:
   limits:
     cpu: 30m
